@@ -14,11 +14,11 @@ server.connection({
   
 
 var config = {
-    user: '',
-    password: '',
-    server: '',
-    port: 0000,
-    database: '',
+    user: 'admin',
+    password: 'admin123',
+    server: 'instanciadb.cwoq5axoaazy.us-west-1.rds.amazonaws.com',
+    port: 1433,
+    database: 'DB_UNITEC',
     requestTimeout: 300000
 }
 
