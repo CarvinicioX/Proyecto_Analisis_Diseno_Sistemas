@@ -5,7 +5,7 @@ exports.insert_maestro = {
 	handler: function(request, reply) {
 		var request2 = new sql.Request();
 		var query_string = "INSERT INTO Maestros (nombre, direccion, telefono, email, birth_date)";
-		query_string+=" VALUES (\'"+request.payload.nombres+"\', \'"+request.payload.direccion+"\', \'"+request.payload.telefono+"\',\'"+request.payload.email+"\',\'"+request.payload.birth_date+"\')";
+		query_string+=" VALUES (\'"+request.payload.nombre+"\', \'"+request.payload.direccion+"\', \'"+request.payload.telefono+"\',\'"+request.payload.email+"\',\'"+request.payload.birth_date+"\')";
 		request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
