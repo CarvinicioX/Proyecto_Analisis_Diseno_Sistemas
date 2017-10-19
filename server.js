@@ -8,7 +8,7 @@ var auth = require('hapi-auth-cookie');
 
 var server = new hapi.Server();
 server.connection({
-    host:'localhost',
+    host:'https://analisisbackend.herokuapp.com',
     port: 8000,
     routes: { cors:true}});
   
