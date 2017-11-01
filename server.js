@@ -6,7 +6,7 @@ var auth = require('hapi-auth-cookie');
 
 
 
-var server = new Hapi.Server(+process.env.PORT, '0.0.0.0');
+var server = new hapi.Server(+process.env.PORT, '0.0.0.0');
 server.connection({
     host:'https://analisisbackend.herokuapp.com',
     port: 8000,
