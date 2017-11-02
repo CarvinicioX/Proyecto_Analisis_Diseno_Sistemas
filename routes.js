@@ -9,6 +9,8 @@ var ClasesController = require('./controllers/claseController');
 var SeccionesController = require('./controllers/seccionController');
 
 exports.endpoints = [
+	//Default
+	{method: 'GET', path: '/', config: {handler: function(request, reply){reply('Proyecto Análisis y Diseño de Sistemas ...');}}},
 	/* ENDPOINTS ADMINISTRADORES */
 	{method: 'POST', path: '/insert_admin', config: AdminController.insert_admin},
 	{method: 'POST', path: '/update_admin', config: AdminController.update_admin},
