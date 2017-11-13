@@ -46,8 +46,8 @@ exports.login = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
         var query_string = "";
-		query_string = query_string + " DECLARE @password varchar(50) = \'"+request.payload.username+"\';";
-		query_string = query_string + " DECLARE @username varchar(50) = \'"+request.payload.password+"\';";
+		query_string = query_string + " DECLARE @username varchar(50) = \'"+request.payload.username+"\';";
+		query_string = query_string + " DECLARE @password varchar(50) = \'"+request.payload.password+"\';";
 		query_string = query_string + " IF EXISTS(SELECT 1 FROM usuarios WHERE username = @username AND password = @password)";
 		query_string = query_string + " BEGIN";
 		query_string = query_string + " SELECT 1 as success_status, usuarios.username, usuarios.creation_date, usuarios.codigo, perfiles.perfil_id, perfiles.descripcion FROM usuarios";
@@ -60,7 +60,7 @@ exports.login = {
 		query_string = query_string + " SELECT -1 as success_status";
 		query_string = query_string + " END";
     	request2.query(query_string).then(function(recordset) {
-			reply(1);
+			reply(recordset);
 		}).catch(function(err) {
 			console.dir(err);
 			reply(-1);
@@ -96,7 +96,7 @@ exports.get_user = {
 		query_string = query_string + " SELECT -1 as success_status";
 		query_string = query_string + " END";
     	request2.query(query_string).then(function(recordset) {
-			reply(1);
+			reply(recordset);
 		}).catch(function(err) {
 			console.dir(err);
 			reply(-1);
