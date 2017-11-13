@@ -14,6 +14,7 @@ exports.endpoints = [
 	/* ENDPOINTS AUTH */
 	{method: 'POST', path: '/register', config: AuthController.register},
 	{method: 'POST', path: '/login', config: AuthController.login},
+	{method: 'POST', path: '/get_user', config: AuthController.get_user},
 	/* ENDPOINTS ADMINISTRADORES */
 	{method: 'POST', path: '/insert_admin', config: AdminController.insert_admin},
 	{method: 'POST', path: '/update_admin', config: AdminController.update_admin},

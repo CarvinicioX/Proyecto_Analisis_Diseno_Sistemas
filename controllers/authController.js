@@ -46,8 +46,55 @@ exports.login = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
         var query_string = "";
-        query_string = query_string + " USE DB_UNITEC";
+		query_string = query_string + " DECLARE @password varchar(50) = \'"+request.payload.username+"\';";
+		query_string = query_string + " DECLARE @username varchar(50) = \'"+request.payload.password+"\';";
+		query_string = query_string + " IF EXISTS(SELECT 1 FROM usuarios WHERE username = @username AND password = @password)";
+		query_string = query_string + " BEGIN";
+		query_string = query_string + " SELECT 1 as success_status, usuarios.username, usuarios.creation_date, usuarios.codigo, perfiles.perfil_id, perfiles.descripcion FROM usuarios";
+		query_string = query_string + " INNER JOIN user_code_reference ON usuarios.codigo = user_code_reference.codigo";
+		query_string = query_string + " INNER JOIN perfiles ON user_code_reference.id_perfil = perfiles.perfil_id";
+		query_string = query_string + " WHERE username = @username";
+		query_string = query_string + " END";
+		query_string = query_string + " ELSE";
+		query_string = query_string + " BEGIN";
+		query_string = query_string + " SELECT -1 as success_status";
+		query_string = query_string + " END";
+    	request2.query(query_string).then(function(recordset) {
+			reply(1);
+		}).catch(function(err) {
+			console.dir(err);
+			reply(-1);
+		});
+    }
+};
 
+/*LOGIN*/
+exports.get_user = {
+    handler: function(request, reply) {
+    	var request2 = new sql.Request();
+        var query_string = "";
+		query_string = query_string + " DECLARE @codigo varchar(10) = \'"+request.payload.codigo+"\';";
+		query_string = query_string + " DECLARE @perfil tinyint = \'"+request.payload.perfil+"\';";
+		query_string = query_string + " IF @perfil = 1";
+		query_string = query_string + " BEGIN";
+		query_string = query_string + " SELECT 1  as success_status, * FROM admins WHERE codigo = @codigo";
+		query_string = query_string + " END";
+		query_string = query_string + " ELSE IF @perfil = 2";
+		query_string = query_string + " BEGIN";
+		query_string = query_string + " SELECT 1  as success_status, * FROM alumnos WHERE codigo = @codigo";
+		query_string = query_string + " END";
+		query_string = query_string + " ELSE IF @perfil = 3";
+		query_string = query_string + " BEGIN";
+		query_string = query_string + " SELECT 1  as success_status, * FROM maestros WHERE codigo = @codigo";
+		query_string = query_string + " END";
+		query_string = query_string + " ELSE IF @perfil = 4";
+		query_string = query_string + " BEGIN";
+		query_string = query_string + " SELECT 1  as success_status, * FROM padres WHERE codigo = @codigo";
+		query_string = query_string + " END";
+		query_string = query_string + " ELSE";
+		query_string = query_string + " BEGIN ";
+		query_string = query_string + " SELECT -1 as success_status";
+		query_string = query_string + " END";
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
