@@ -7,6 +7,7 @@ var TareasController = require('./controllers/tareaController');
 var GradosController = require('./controllers/gradoController');
 var ClasesController = require('./controllers/claseController');
 var SeccionesController = require('./controllers/seccionController');
+var CalificacionesController = require('./controllers/calificacionController');
 var AuthController = require('./controllers/authController');
 exports.endpoints = [
 	//Default
@@ -59,5 +60,10 @@ exports.endpoints = [
 	{method: 'POST', path: '/insert_seccion', config: SeccionesController.insert_seccion},
 	{method: 'POST', path: '/update_seccion', config: SeccionesController.update_seccion},
 	{method: 'POST', path: '/delete_seccion', config: SeccionesController.delete_seccion},
-	{method: 'GET', path: '/get_secciones', config: SeccionesController.get_secciones}
+	{method: 'GET', path: '/get_secciones', config: SeccionesController.get_secciones},
+	/* ENDPOINTS SECCIONES */
+	{method: 'POST', path: '/insert_calificacion', config: CalificacionesController.insert_calificacion},
+	{method: 'POST', path: '/update_calificacion', config: CalificacionesController.update_calificacion},
+	{method: 'POST', path: '/delete_calificacion', config: CalificacionesController.delete_calificacion},
+	{method: 'GET', path: '/get_calificaciones', config: CalificacionesController.get_calificaciones}
 ];
