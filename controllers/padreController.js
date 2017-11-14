@@ -45,7 +45,7 @@ exports.update_padre = {
     	var request2 = new sql.Request();
     	var query_string = "UPDATE Padres";
     	query_string+=" SET nombre = \'"+request.payload.nombre+"\', telefono = \'"+request.payload.telefono+"\', direccion = \'"+request.payload.direccion+"\', correo = \'"+request.payload.correo+"\'";
-    	query_string+=" WHERE Padres.IDpadre = "+request.payload.IDpadre;
+    	query_string+=" WHERE Padres.codigo = "+request.payload.codigo;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -61,7 +61,7 @@ exports.delete_padre = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
     	var query_string = "DELETE FROM Padres";
-    	query_string+=" WHERE Padres.IDpadre = "+request.payload.IDpadre;
+    	query_string+=" WHERE Padres.codigo = "+request.payload.codigo;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
