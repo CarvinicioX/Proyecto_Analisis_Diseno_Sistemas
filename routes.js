@@ -25,7 +25,6 @@ exports.endpoints = [
 	{method: 'POST', path: '/insert_user', config: UserController.insert_user},
 	{method: 'POST', path: '/update_user', config: UserController.update_user},
 	{method: 'POST', path: '/delete_user', config: UserController.delete_user},
-	{method: 'GET', path: '/get_users', config: UserController.get_users},
 	/* ENDPOINTS ALUMNOS */
 	{method: 'POST', path: '/insert_alumno', config: AlumnosController.insert_alumno},
 	{method: 'POST', path: '/update_alumno', config: AlumnosController.update_alumno},

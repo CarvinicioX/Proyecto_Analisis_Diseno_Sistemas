@@ -46,17 +46,3 @@ exports.delete_user = {
 		});
     }
 };
-
-/*GET USUARIOS*/
-exports.get_users = {
-    handler: function(request, reply) {
-    	var request2 = new sql.Request();
-    	var query_string = "SELECT * FROM Usuarios";
-    	request2.query(query_string).then(function(recordset) {
-			reply(recordset);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
-    }
-};
