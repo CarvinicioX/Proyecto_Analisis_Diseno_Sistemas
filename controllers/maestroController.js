@@ -20,15 +20,15 @@ exports.insert_maestro = {
         query_string = query_string + " VALUES (@currentYear + '00001' + @userScope, @currentYear, '00001', @hash, 0, @userScope)";
         query_string = query_string + " INSERT INTO Maestros (codigo, nombre, direccion, telefono, email, birth_date)";
         query_string = query_string + " VALUES (@currentYear + '00001' + @userScope, \'"+request.payload.nombre+"\', \'"+request.payload.direccion+"\', \'"+request.payload.telefono+"\',\'"+request.payload.email+"\',\'"+request.payload.birth_date+"\')";
-        query_string = query_string + " SELECT 0 as success_result, @hash as hash, (@currentYear + '00001' + @userScope) as code";
-        query_string = query_string + " END";
-        query_string = query_string + " ELSE";
-        query_string = query_string + " BEGIN";
-        query_string = query_string + " INSERT INTO user_code_reference (codigo, year_ref, code_ref, hash, status, id_perfil)";
+        query_string = query_string + " SELECT 0 as success_result, @hash as hash, (@currentYear + '00001' + @userScope) as code"
+        query_string = query_string + " END"
+        query_string = query_string + " ELSE"
+        query_string = query_string + " BEGIN"
+        query_string = query_string + " INSERT INTO user_code_reference (codigo, year_ref, code_ref, hash, status, id_perfil)"
         query_string = query_string + " VALUES (@currentYear + @currentUserCode + @userScope, @currentYear, @currentUserCode, @hash, 0, @userScope)";
         query_string = query_string + " INSERT INTO Maestros (codigo, nombre, direccion, telefono, email, birth_date)";
         query_string = query_string + " VALUES (@currentYear + @currentUserCode + @userScope, \'"+request.payload.nombre+"\', \'"+request.payload.direccion+"\', \'"+request.payload.telefono+"\',\'"+request.payload.email+"\',\'"+request.payload.birth_date+"\')";
-        query_string = query_string + " SELECT 0 as success_result, @hash as hash, (@currentYear + @currentUserCode + @userScope) as code";
+        query_string = query_string + " SELECT 0 as success_result, @hash as hash, (@currentYear + @currentUserCode + @userScope) as code"
         query_string = query_string + " END";
 		request2.query(query_string).then(function(recordset) {
 			reply(recordset);
@@ -45,7 +45,7 @@ exports.update_maestro = {
     	var request2 = new sql.Request();
     	var query_string = "UPDATE Maestros";
     	query_string+=" SET nombre = \'"+request.payload.nombre+"\', direccion = \'"+request.payload.direccion+"\', telefono = \'"+request.payload.telefono+"\', email = \'"+request.payload.email+"\', birth_date = \'"+request.payload.birth_date+"\'";
-    	query_string+=" WHERE Maestros.codigo = "+request.payload.codigo;
+    	query_string+=" WHERE Maestros.IDmaestro = "+request.payload.IDmaestro;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -60,7 +60,7 @@ exports.delete_maestro = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
     	var query_string = "DELETE FROM Maestros";
-    	query_string+=" WHERE Maestros.codigo = "+request.payload.codigo;
+    	query_string+=" WHERE Maestros.IDmaestro = "+request.payload.IDmaestro;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -82,18 +82,4 @@ exports.get_maestros = {
 			reply(-1);
 		});
     }
-};
-
-/*GET CLASES MAESTRO*/
-exports.get_clases = {
-	handler: function(request, reply) {
-		var request2 = new sql.Request();
-		var query_string = "";
-		request2.query(query_string).then(function(recordser) {
-			reply(recordst);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
-	}
 };

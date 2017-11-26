@@ -37,7 +37,7 @@ exports.delete_admin = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
     	var query_string = "DELETE FROM Administrador";
-    	query_string+=" WHERE Administrador.codigo = "+request.payload.codigo;
+    	query_string+=" WHERE Administrador.IDadmin = "+request.payload.IDadmin;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {

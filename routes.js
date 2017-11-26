@@ -7,11 +7,15 @@ var TareasController = require('./controllers/tareaController');
 var GradosController = require('./controllers/gradoController');
 var ClasesController = require('./controllers/claseController');
 var SeccionesController = require('./controllers/seccionController');
-var CalificacionesController = require('./controllers/calificacionController');
 var AuthController = require('./controllers/authController');
 exports.endpoints = [
 	//Default
 	{method: 'GET', path: '/', config: {handler: function(request, reply){reply('Proyecto Análisis y Diseño de Sistemas ...');}}},
+	/* ENDPOINTS ALUMNOS */
+	{method: 'POST', path: '/insert_alumno', config: AlumnosController.insert_alumno},
+	{method: 'PUT', path: '/update_alumno', config: AlumnosController.update_alumno},
+	{method: 'DELETE', path: '/delete_alumno', config: AlumnosController.delete_alumno},
+	{method: 'GET', path: '/get_alumnos', config: AlumnosController.get_alumnos},
 	/* ENDPOINTS AUTH */
 	{method: 'POST', path: '/register', config: AuthController.register},
 	{method: 'POST', path: '/login', config: AuthController.login},
@@ -25,11 +29,8 @@ exports.endpoints = [
 	{method: 'POST', path: '/insert_user', config: UserController.insert_user},
 	{method: 'POST', path: '/update_user', config: UserController.update_user},
 	{method: 'POST', path: '/delete_user', config: UserController.delete_user},
-	/* ENDPOINTS ALUMNOS */
-	{method: 'POST', path: '/insert_alumno', config: AlumnosController.insert_alumno},
-	{method: 'POST', path: '/update_alumno', config: AlumnosController.update_alumno},
-	{method: 'POST', path: '/delete_alumno', config: AlumnosController.delete_alumno},
-	{method: 'GET', path: '/get_alumnos', config: AlumnosController.get_alumnos},
+	{method: 'GET', path: '/get_users', config: UserController.get_users},
+	
 	/* ENDPOINTS MAESTROS */
 	{method: 'POST', path: '/insert_maestro', config: MaestrosController.insert_maestro},
 	{method: 'POST', path: '/update_maestro', config: MaestrosController.update_maestro},
@@ -59,10 +60,5 @@ exports.endpoints = [
 	{method: 'POST', path: '/insert_seccion', config: SeccionesController.insert_seccion},
 	{method: 'POST', path: '/update_seccion', config: SeccionesController.update_seccion},
 	{method: 'POST', path: '/delete_seccion', config: SeccionesController.delete_seccion},
-	{method: 'GET', path: '/get_secciones', config: SeccionesController.get_secciones},
-	/* ENDPOINTS SECCIONES */
-	{method: 'POST', path: '/insert_calificacion', config: CalificacionesController.insert_calificacion},
-	{method: 'POST', path: '/update_calificacion', config: CalificacionesController.update_calificacion},
-	{method: 'POST', path: '/delete_calificacion', config: CalificacionesController.delete_calificacion},
-	{method: 'GET', path: '/get_calificaciones', config: CalificacionesController.get_calificaciones}
+	{method: 'GET', path: '/get_secciones', config: SeccionesController.get_secciones}
 ];

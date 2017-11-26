@@ -4,8 +4,8 @@ var sql = require('mssql');
 exports.insert_tarea = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
-    	var query_string = "INSERT INTO Tareas (entrega, asignada, entregada, IDseccion, nombre, tipo, descripcion, valor)";
-    	query_string+=" VALUES (\'"+request.payload.entrega+"\', \'"+request.payload.asignada+"\', \'"+request.payload.entregada+"\', \'"+request.payload.IDseccion+"\', \'"+request.payload.nombre+"\', \'"+request.payload.tipo+"\', \'"+request.payload.descripcion+"\', \'"+request.payload.valor+"\')";
+    	var query_string = "INSERT INTO Tareas (entrega, asignada, entregada, IDseccion, IDgrado, IDclase, nombre, tipo, descripcion, valor)";
+    	query_string+=" VALUES (\'"+request.payload.entrega+"\', \'"+request.payload.asignada+"\', \'"+request.payload.entregada+"\', \'"+request.payload.IDseccion+"\', \'"+request.payload.IDgrado+"\', \'"+request.payload.IDclase+"\', \'"+request.payload.nombre+"\', \'"+request.payload.tipo+"\', \'"+request.payload.descripcion+"\', \'"+request.payload.valor+"\')";
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -20,7 +20,7 @@ exports.update_tarea = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
     	var query_string = "UPDATE Tareas";
-    	query_string+=" SET entrega = \'"+request.payload.entrega+"\', telefono = \'"+request.payload.asignada+"\', entregada = \'"+request.payload.entregada+"\', IDseccion = \'"+request.payload.IDseccion+"\', nombre = \'"+request.payload.nombre+"\', tipo = \'"+request.payload.tipo+"\', descripcion = \'"+request.payload.descripcion+"\', valor = \'"+request.payload.valor+"\')";
+    	query_string+=" SET entrega = \'"+request.payload.entrega+"\', telefono = \'"+request.payload.asignada+"\', entregada = \'"+request.payload.entregada+"\', IDseccion = \'"+request.payload.IDseccion+"\', IDgrado = \'"+request.payload.IDgrado+"\', IDclase = \'"+request.payload.IDclase+"\', nombre = \'"+request.payload.nombre+"\', tipo = \'"+request.payload.tipo+"\', descripcion = \'"+request.payload.descripcion+"\', valor = \'"+request.payload.valor+"\')";
     	query_string+=" WHERE Tareas.IDtarea = "+request.payload.IDtarea;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
