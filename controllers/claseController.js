@@ -4,7 +4,7 @@ var sql = require('mssql');
 exports.insert_clase = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
-    	var query_string = "INSERT INTO Clases (nombre)";
+    	var query_string = "INSERT INTO  clases (nombre)";
     	query_string+=" VALUES (\'"+request.payload.nombre+"\')";
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
@@ -19,9 +19,9 @@ exports.insert_clase = {
 exports.update_clase = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
-    	var query_string = "UPDATE Clases";
+    	var query_string = "UPDATE clases";
     	query_string+=" SET nombre = \'"+request.payload.nombre+"\'";
-    	query_string+=" WHERE Clases.IDclase = "+request.payload.IDclase;
+    	query_string+=" WHERE clases.codigo = "+request.payload.codigo;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -36,8 +36,8 @@ exports.update_clase = {
 exports.delete_clase = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
-    	var query_string = "DELETE FROM Clases";
-    	query_string+=" WHERE Clases.IDclase = "+request.payload.IDclase;
+    	var query_string = "DELETE FROM clases";
+    	query_string+=" WHERE clases.codigo = "+request.query.codigo;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -48,10 +48,10 @@ exports.delete_clase = {
 };
 
 /*GET CLASES*/
-exports.get_clases = {
+exports.get_listado_clases = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
-    	var query_string = "SELECT * FROM Clases";
+    	var query_string = "SELECT * FROM clases";
     	request2.query(query_string).then(function(recordset) {
 			reply(recordset);
 		}).catch(function(err) {

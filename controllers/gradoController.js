@@ -1,62 +1,62 @@
 var sql = require('mssql');
 
-/*INSERT GRADOS*/
+/*INSERT CLASES*/
 exports.insert_grado = {
     handler: function(request, reply) {
-    	var request2 = new sql.Request();
-    	var query_string = "INSERT INTO Grado (grado)";
-    	query_string+=" VALUES (\'"+request.payload.grado+"\')";
-    	request2.query(query_string).then(function(recordset) {
-			reply(1);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
+        var request2 = new sql.Request();
+        var query_string = "INSERT INTO  grado (nombre)";
+        query_string+=" VALUES (\'"+request.payload.nombre+"\')";
+        request2.query(query_string).then(function(recordset) {
+            reply(1);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
     }
 };
 
-/*UPDATE GRADOS*/
+/*UPDATE CLASES*/
 exports.update_grado = {
     handler: function(request, reply) {
-    	var request2 = new sql.Request();
-    	var query_string = "UPDATE Grado";
-    	query_string+=" SET grado = \'"+request.payload.grado+"\'";
-    	query_string+=" WHERE Grado.IDgrado = "+request.payload.IDgrado;
-    	request2.query(query_string).then(function(recordset) {
-			reply(1);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
+        var request2 = new sql.Request();
+        var query_string = "UPDATE grado";
+        query_string+=" SET nombre = \'"+request.payload.nombre+"\'";
+        query_string+=" WHERE grado.codigo = "+request.payload.codigo;
+        request2.query(query_string).then(function(recordset) {
+            reply(1);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
     }
 };
 
 
-/*DELETE GRADOS*/
+/*DELETE CLASES*/
 exports.delete_grado = {
     handler: function(request, reply) {
-    	var request2 = new sql.Request();
-    	var query_string = "DELETE FROM Grado";
-    	query_string+=" WHERE Grado.IDgrado = "+request.payload.IDgrado;
-    	request2.query(query_string).then(function(recordset) {
-			reply(1);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
+        var request2 = new sql.Request();
+        var query_string = "DELETE FROM grado";
+        query_string+=" WHERE grado.codigo = "+request.query.codigo;
+        request2.query(query_string).then(function(recordset) {
+            reply(1);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
     }
 };
 
-/*GET GRADOS*/
-exports.get_grados = {
+/*GET CLASES*/
+exports.get_listado_grados = {
     handler: function(request, reply) {
-    	var request2 = new sql.Request();
-    	var query_string = "SELECT * FROM Grado";
-    	request2.query(query_string).then(function(recordset) {
-			reply(recordset);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
+        var request2 = new sql.Request();
+        var query_string = "SELECT * FROM grado";
+        request2.query(query_string).then(function(recordset) {
+            reply(recordset);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
     }
 };

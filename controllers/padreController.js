@@ -1,5 +1,40 @@
 var sql = require('mssql');
 
+/*GET PADRES*/
+exports.get_padre = {
+    handler: function(request, reply) {
+        var request2 = new sql.Request();
+        var query_string = "SELECT REF.hash as hash, padres.* FROM padres";
+        query_string = query_string + " INNER JOIN user_code_reference as REF on padres.codigo = REF.codigo";
+        query_string = query_string + " WHERE padres.codigo LIKE '%"+ request.query.codigo +"%'";
+        query_string = query_string + " AND padres.nombre LIKE '%"+ request.query.nombre +"%'";
+        query_string = query_string + " AND padres.direccion LIKE '%"+ request.query.direccion +"%'";
+        query_string = query_string + " AND padres.telefono LIKE '%"+ request.query.telefono +"%'";
+        query_string = query_string + " AND padres.correo LIKE '%"+ request.query.correo +"%'";
+        request2.query(query_string).then(function(recordset) {
+            reply(recordset);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
+    }
+};
+
+/*GET LISTADO PADRES*/
+exports.get_listado_padres = {
+    handler: function(request, reply) {
+        var request2 = new sql.Request();
+        var query_string = "";
+        query_string = query_string + " SELECT * FROM padres";
+        request2.query(query_string).then(function(recordset) {
+            reply(recordset);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
+    }
+};
+
 /*INSERT PADRES*/
 exports.insert_padre = {
     handler: function(request, reply) {
@@ -45,7 +80,7 @@ exports.update_padre = {
     	var request2 = new sql.Request();
     	var query_string = "UPDATE Padres";
     	query_string+=" SET nombre = \'"+request.payload.nombre+"\', telefono = \'"+request.payload.telefono+"\', direccion = \'"+request.payload.direccion+"\', correo = \'"+request.payload.correo+"\'";
-    	query_string+=" WHERE Padres.IDpadre = "+request.payload.IDpadre;
+    	query_string+=" WHERE Padres.codigo = "+request.payload.codigo;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -61,7 +96,7 @@ exports.delete_padre = {
     handler: function(request, reply) {
     	var request2 = new sql.Request();
     	var query_string = "DELETE FROM Padres";
-    	query_string+=" WHERE Padres.IDpadre = "+request.payload.IDpadre;
+    	query_string+=" WHERE Padres.codigo = "+request.query.codigo;
     	request2.query(query_string).then(function(recordset) {
 			reply(1);
 		}).catch(function(err) {
@@ -71,16 +106,3 @@ exports.delete_padre = {
     }
 };
 
-/*GET PADRES*/
-exports.get_padre = {
-    handler: function(request, reply) {
-    	var request2 = new sql.Request();
-    	var query_string = "SELECT * FROM Padres";
-    	request2.query(query_string).then(function(recordset) {
-			reply(recordset);
-		}).catch(function(err) {
-			console.dir(err);
-			reply(-1);
-		});
-    }
-};
