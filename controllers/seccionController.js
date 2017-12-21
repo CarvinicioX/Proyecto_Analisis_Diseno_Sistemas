@@ -22,6 +22,27 @@ exports.get_secciones = {
     }
 };
 
+/*GET SECCIONES POR MAESTRO*/
+exports.get_secciones_maestro = {
+    handler: function(request, reply) {
+        var request2 = new sql.Request();
+        var query_string = "";
+        query_string = query_string + " SELECT MAE.nombre as maestro, CLA.nombre as clase, GRA.nombre as grado, secciones.* FROM secciones ";
+        query_string = query_string + " INNER JOIN maestros as MAE on secciones.codigo_maestro = MAE.codigo";
+        query_string = query_string + " INNER JOIN clases as CLA on secciones.codigo_clase = CLA.codigo";
+        query_string = query_string + " INNER JOIN grado as GRA on secciones.codigo_grado = GRA.codigo";
+        query_string = query_string + " WHERE secciones.codigo_maestro = \'" + request.query.codigo + "\'";
+
+        request2.query(query_string).then(function(recordset) {
+            reply(recordset);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
+    }
+}
+
+
 /*GET ALUMNOS SECCION*/
 exports.get_alumnos_seccion = {
     handler: function(request, reply) {
@@ -127,6 +148,25 @@ exports.delete_seccion = {
         query_string= query_string+" WHERE secciones.codigo = "+request.query.codigo;
         request2.query(query_string).then(function(recordset) {
             reply(1);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
+    }
+};
+
+/*GET CURSO*/
+exports.get_curso = {
+    handler: function(request, reply) {
+        var request2 = new sql.Request();
+        var query_string = "";
+        query_string = query_string + " SELECT MAE.nombre as maestro, CLA.nombre as clase, GRA.nombre as grado, secciones.* FROM secciones ";
+        query_string = query_string + " INNER JOIN maestros as MAE on secciones.codigo_maestro = MAE.codigo";
+        query_string = query_string + " INNER JOIN clases as CLA on secciones.codigo_clase = CLA.codigo";
+        query_string = query_string + " INNER JOIN grado as GRA on secciones.codigo_grado = GRA.codigo";
+        query_string= query_string+" WHERE secciones.codigo = "+request.query.codigo;
+        request2.query(query_string).then(function(recordset) {
+            reply(recordset);
         }).catch(function(err) {
             console.dir(err);
             reply(-1);

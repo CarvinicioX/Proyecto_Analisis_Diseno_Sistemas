@@ -36,6 +36,23 @@ exports.get_listado_alumnos = {
     }
 };
 
+/*GET LISTADO ALUMNOS*/
+exports.get_listado_alumnos_curso = {
+    handler: function(request, reply) {
+        var request2 = new sql.Request();
+        var query_string = "";
+        query_string = query_string + " SELECT * FROM alumnos";
+        query_string = query_string + " inner join seccion_alumno on alumnos.codigo = seccion_alumno.codigo_alumno";
+        query_string = query_string + " WHERE seccion_alumno.codigo_seccion = \'" + request.query.codigo + "\'";
+        request2.query(query_string).then(function(recordset) {
+            reply(recordset);
+        }).catch(function(err) {
+            console.dir(err);
+            reply(-1);
+        });
+    }
+};
+
 /*INSERT ALUMNOS*/
 exports.insert_alumno = {
     handler: function(request, reply) {

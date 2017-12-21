@@ -8,6 +8,7 @@ var GradosController = require('./controllers/gradoController');
 var ClasesController = require('./controllers/claseController');
 var SeccionesController = require('./controllers/seccionController');
 var AuthController = require('./controllers/authController');
+
 exports.endpoints = [
 	//Default
 	{method: 'GET', path: '/', config: {handler: function(request, reply){reply('Proyecto Análisis y Diseño de Sistemas ...');}}},
@@ -17,6 +18,7 @@ exports.endpoints = [
 	{method: 'DELETE', path: '/delete_alumno', config: AlumnosController.delete_alumno},
 	{method: 'GET', path: '/get_alumnos', config: AlumnosController.get_alumnos},
 	{method: 'GET', path: '/get_listado_alumnos', config: AlumnosController.get_listado_alumnos},
+	{method: 'GET', path: '/get_listado_alumnos_curso', config: AlumnosController.get_listado_alumnos_curso},
 	/* ENDPOINTS MAESTROS */
 	{method: 'POST', path: '/insert_maestro', config: MaestrosController.insert_maestro},
 	{method: 'PUT', path: '/update_maestro', config: MaestrosController.update_maestro},
@@ -50,6 +52,8 @@ exports.endpoints = [
 	{method: 'GET', path: '/get_secciones', config: SeccionesController.get_secciones},
 	{method: 'GET', path: '/get_listado_secciones', config: SeccionesController.get_listado_secciones},
 	{method: 'GET', path: '/get_alumnos_seccion', config: SeccionesController.get_alumnos_seccion},
+	{method: 'GET', path: '/get_secciones_maestro', config: SeccionesController.get_secciones_maestro},
+	{method: 'GET', path: '/get_curso', config: SeccionesController.get_curso},
 	
 	/* ENDPOINTS ADMINISTRADORES */
 	{method: 'POST', path: '/insert_admin', config: AdminController.insert_admin},
@@ -63,10 +67,10 @@ exports.endpoints = [
 	{method: 'GET', path: '/get_users', config: UserController.get_users},
 	/* ENDPOINTS TAREAS */
 	{method: 'POST', path: '/insert_tarea', config: TareasController.insert_tarea},
-	{method: 'POST', path: '/update_tarea', config: TareasController.update_tarea},
-	{method: 'POST', path: '/delete_tarea', config: TareasController.delete_tarea},
-	{method: 'GET', path: '/get_tareas', config: TareasController.get_tarea},
-	
-	
+	{method: 'GET', path: '/get_tareas_curso', config: TareasController.get_tareas_curso},
+	{method: 'PUT', path: '/update_tarea', config: TareasController.update_tareas},
+	{method: 'DELETE', path: '/delete_tarea', config: TareasController.delete_tareas},
+	{method: 'POST', path: '/calificar', config: TareasController.post_calificar},
+	{method: 'GET', path: '/calificaciones', config: TareasController.get_calificaciones}
 	
 ];
